@@ -124,4 +124,21 @@ describe('User Entity integration tests', () => {
             entity.update('other name');
         })
     })
+
+    describe('Update Password method', () => {
+        it('should throw an error when update invalid user password', () => {
+            const entity = new UserEntity(userDataBuilder({}));
+            expect(() => entity.updatePassword(null)).toThrowError(EntityValidationError);
+            expect(() => entity.updatePassword('')).toThrowError(EntityValidationError);
+            expect(() => entity.updatePassword(1 as any)).toThrowError(EntityValidationError);
+            expect(() => entity.updatePassword('a'.repeat(101))).toThrowError(EntityValidationError);
+        })
+
+        it('should update a valid user', () => {
+            expect.assertions(0);
+            const props: UserProps = { ...userDataBuilder({}) };
+            const entity = new UserEntity(props);
+            entity.updatePassword('validpassword');
+        })
+    })
 })
