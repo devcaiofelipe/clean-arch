@@ -31,7 +31,7 @@ describe('Entity unit tests', () => {
         const props = { prop1: 'value1', prop2: 15 }
         const entity = new StubEntity(props, fakeUUID);
         expect(entity.toJSON()).toStrictEqual({
-            fakeUUID,
+            id: fakeUUID,
             ...props,
         })
     });
