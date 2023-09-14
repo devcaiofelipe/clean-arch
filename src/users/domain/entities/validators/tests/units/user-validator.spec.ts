@@ -1,11 +1,14 @@
 import { userDataBuilder } from "@/users/domain/testing/helpers/user-data-builder";
 import { UserRules, UserValidator, UserValidatorFactory } from "../../user-validator"
+import { UserProps } from "../../../user.entity";
 
 let sut: UserValidator;
+let props: UserProps;
 
 describe('UserValidator unit tests', () => {
     beforeEach(() => {
         sut = UserValidatorFactory.create();
+        props = userDataBuilder({});
     })
 
     it('valid cases for use validator class field', () => {
@@ -15,7 +18,7 @@ describe('UserValidator unit tests', () => {
         expect(sut.validatedData).toStrictEqual(new UserRules(props));
     })
 
-    describe('Name Field', () => {
+    describe('name Field', () => {
         it('invalidation cases for name field', () => {
             let isValid = sut.validate(null as any);
             expect(isValid).toBeFalsy();
@@ -46,7 +49,7 @@ describe('UserValidator unit tests', () => {
         })
     })
 
-    describe('Email Field', () => {
+    describe('e-mail Field', () => {
         it('invalidation cases for email field', () => {
             let isValid = sut.validate(null as any);
             expect(isValid).toBeFalsy();
@@ -79,7 +82,7 @@ describe('UserValidator unit tests', () => {
         })
     })
 
-    describe('Password Field', () => {
+    describe('password Field', () => {
         it('invalidation cases for password field', () => {
             let isValid = sut.validate(null as any);
             expect(isValid).toBeFalsy();
@@ -106,6 +109,23 @@ describe('UserValidator unit tests', () => {
             expect(isValid).toBeFalsy();
             expect(sut.errors['password']).toStrictEqual([
                 'password must be shorter than or equal to 100 characters',
+            ])
+        })
+    })
+
+    describe('createAt Field', () => {
+        it('invalidation cases for createdAt field', () => {
+            let isValid = sut.validate({ ...props, createdAt: 10 as any });
+            expect(isValid).toBeFalsy();
+
+            expect(sut.errors['createdAt']).toStrictEqual([
+                'createdAt must be a Date instance',
+            ])
+
+            isValid = sut.validate({ ...props, createdAt: '2023' as any });
+            expect(isValid).toBeFalsy();
+            expect(sut.errors['createdAt']).toStrictEqual([
+                'createdAt must be a Date instance',
             ])
         })
     })
