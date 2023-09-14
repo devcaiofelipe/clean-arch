@@ -21,6 +21,13 @@ describe('User Entity integration tests', () => {
             }
 
             expect(() => new UserEntity(props)).toThrowError(EntityValidationError);
+
+            props = {
+                ...userDataBuilder({}),
+                name: 1 as any,
+            }
+
+            expect(() => new UserEntity(props)).toThrowError(EntityValidationError);
         })
 
     })
