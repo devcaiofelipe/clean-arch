@@ -7,7 +7,7 @@ type StubEntityProps = {
     price: number;
 }
 
-class StubEntity extends Entity {}
+class StubEntity extends Entity<StubEntityProps> {}
 
 class StubInMemoryRepository extends InMemoryRepository<StubEntity> {}
 
