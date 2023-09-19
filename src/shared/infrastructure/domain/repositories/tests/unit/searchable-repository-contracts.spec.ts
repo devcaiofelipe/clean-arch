@@ -1,4 +1,4 @@
-import { SearchParams } from "../../searchable-repository-contracts";
+import { SearchParams, SearchResult } from "../../searchable-repository-contracts";
 
 describe('Searchable Repository unit tests', () => {
     describe('SearchParams tests', () => {
@@ -99,5 +99,74 @@ describe('Searchable Repository unit tests', () => {
               expect(new SearchParams({ filter: item.filter as any }).filter).toBe(item.expected)
           })
       })
+    })
+
+    describe('SearchResult tests', () => {
+        it('constructor props', () => {
+            let sut = new SearchResult({
+                items: ['test1', 'test2', 'test3', 'test4'] as any,
+                total: 4,
+                currentPage: 1,
+                perPage: 2,
+                sort: null,
+                sortDir: null,
+                filter: null
+            })
+            expect(sut.toJson()).toStrictEqual(
+                {
+                    items: ['test1', 'test2', 'test3', 'test4'] as any,
+                    total: 4,
+                    currentPage: 1,
+                    perPage: 2,
+                    sort: null,
+                    sortDir: null,
+                    filter: null,
+                    lastPage: 2
+                }
+            );
+            sut = new SearchResult({
+                items: ['test1', 'test2', 'test3', 'test4'] as any,
+                total: 4,
+                currentPage: 1,
+                perPage: 2,
+                sort: 'name',
+                sortDir: 'asc',
+                filter: 'test'
+            })
+            expect(sut.toJson()).toStrictEqual(
+                {
+                    items: ['test1', 'test2', 'test3', 'test4'] as any,
+                    total: 4,
+                    currentPage: 1,
+                    perPage: 2,
+                    sort: 'name',
+                    sortDir: 'asc',
+                    filter: 'test',
+                    lastPage: 2
+                }
+            );
+
+            sut = new SearchResult({
+                items: ['test1', 'test2', 'test3', 'test4'] as any,
+                total: 4,
+                currentPage: 1,
+                perPage: 10,
+                sort: 'name',
+                sortDir: 'asc',
+                filter: 'test'
+            })
+            expect(sut.lastPage).toBe(1);
+
+            sut = new SearchResult({
+                items: ['test1', 'test2', 'test3', 'test4'] as any,
+                total: 54,
+                currentPage: 1,
+                perPage: 10,
+                sort: 'name',
+                sortDir: 'asc',
+                filter: 'test'
+            })
+            expect(sut.lastPage).toBe(6);
+        })
     })
 });
