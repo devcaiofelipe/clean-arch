@@ -53,5 +53,9 @@ export abstract class InMemorySearchableRepository<E extends Entity> extends InM
         items: E[],
         page: SearchParams['page'],
         perPage: SearchParams['perPage'],
-    ): Promise<E[]> {}
+    ): E[] {
+        const start = (page - 1) * perPage;
+        const limit = start + perPage;
+        return items.slice(start, limit);
+    }
 }
