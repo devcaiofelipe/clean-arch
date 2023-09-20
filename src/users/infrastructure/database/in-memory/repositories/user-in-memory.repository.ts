@@ -18,7 +18,7 @@ export class UserInMemoryRepository extends InMemorySearchableRepository<UserEnt
     async emailExists(email: string): Promise<void> {
         const entity = this.items.find((item) => item.email === email);
         if (entity) {
-            throw new ConflictError('Email address already used email');
+            throw new ConflictError('Email address already used');
         }
     }
 
