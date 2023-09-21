@@ -2,7 +2,7 @@ import { HashProvider } from '@/shared/application/providers/hash-provider';
 import { compare, hash } from 'bcryptjs';
 
 
-export class BcryptJSHashProvider implements HashProvider {
+export class BCryptJSHashProvider implements HashProvider {
     async generateHash(payload: string): Promise<string> {
         return hash(payload, 6);
     }
@@ -10,5 +10,4 @@ export class BcryptJSHashProvider implements HashProvider {
     async compareHash(payload: string, hash: string): Promise<boolean> {
         return compare(payload, hash);
     }
-
 }
