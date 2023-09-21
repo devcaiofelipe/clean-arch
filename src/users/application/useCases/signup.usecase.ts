@@ -1,6 +1,7 @@
 import { UserEntity } from "@/users/domain/entities/user.entity";
 import { BadRequestError } from "../errors/bad-request-error";
 import { UserRepository } from "@/users/domain/repositories/use.repository";
+import { HashProvider } from "@/shared/application/providers/hash-provider";
 
 export namespace SingUpUseCase {
     export type Input = {
@@ -19,7 +20,10 @@ export namespace SingUpUseCase {
 }
 
 export class UseCase {
-    constructor(private userRepository: UserRepository.Repository) {}
+    constructor(
+        private userRepository: UserRepository.Repository,
+        private hashProvider: HashProvider,
+    ) {}
 
     async execute(input: SingUpUseCase.Input): Promise<SingUpUseCase.Output> {
         const { name, email, password } = input;
@@ -30,7 +34,11 @@ export class UseCase {
 
         await this.userRepository.emailExists(email);
 
-        const entity = new UserEntity(input);
+        const hashPassword = this.hashProvider.generateHash(password);
+
+        const entity = new UserEntity(
+            Object.assign(input, { password: hashPassword })
+        );
         await this.userRepository.insert(entity);
         return entity.toJSON();
     }
