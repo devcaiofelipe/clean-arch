@@ -1,4 +1,5 @@
-import { ClassValidatorFields } from "@/shared/infrastructure/domain/entities/validators/class-validator-fields";
+
+import { ClassValidatorFields } from "@/shared/domain/entities/validators/class-validator-fields";
 import { UserProps } from "@/users/domain/entities/user.entity";
 import { IsDate, IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength } from "class-validator";
 

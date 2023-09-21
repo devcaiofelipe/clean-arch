@@ -1,5 +1,6 @@
-import { UserEntity } from '../entities/user.entity';
-import { SearchParams as DefaultSearchParams, SearchResult as DefaultSearchResult, SearchableRepositoryInterface } from '@/shared/infrastructure/domain/repositories/searchable-repository-contracts';
+import { SearchParams as DefaultSearchParams, SearchResult as DefaultSearchResult, SearchableRepositoryInterface } from "@/shared/domain/repositories/searchable-repository-contracts";
+import { UserEntity } from "../entities/user.entity";
+
 
 export namespace UserRepository {
     export type Filter = string
