@@ -6,7 +6,7 @@ import { userDataBuilder } from '@/users/domain/testing/helpers/user-data-builde
 import { ConflictError } from '@/shared/domain/errors/conflict-error';
 import { BadRequestError } from '@/users/application/errors/bad-request-error';
 
-describe('UsersController', () => {
+describe('SingUpUseCase unit tests', () => {
   let sut: SingUpUseCase.UseCase;
   let repository: UserInMemoryRepository;
   let hashProvider: HashProvider;
