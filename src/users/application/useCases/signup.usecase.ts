@@ -3,6 +3,7 @@ import { BadRequestError } from "../errors/bad-request-error";
 import { UserRepository } from "@/users/domain/repositories/use.repository";
 import { HashProvider } from "@/shared/application/providers/hash-provider";
 import { UserOutput } from "../dtos/user-output";
+import { UseCase as DefaultUseCase } from "@/shared/application/useCases/use-cases";
 
 export namespace SingUpUseCase {
     export type Input = {
@@ -13,7 +14,7 @@ export namespace SingUpUseCase {
 
     export type Output = UserOutput;
 
-    export class UseCase {
+    export class UseCase implements DefaultUseCase<Input, Output> {
         constructor(
             private userRepository: UserRepository.Repository,
             private hashProvider: HashProvider,

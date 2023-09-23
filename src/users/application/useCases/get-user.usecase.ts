@@ -1,5 +1,6 @@
 import { UserRepository } from "@/users/domain/repositories/use.repository";
 import { UserOutput } from "../dtos/user-output";
+import { UseCase as DefaultUseCase } from "@/shared/application/useCases/use-cases";
 
 export namespace GetUserUseCase {
     export type Input = {
@@ -9,7 +10,7 @@ export namespace GetUserUseCase {
     export type Output = UserOutput;
 
 
-    export class UseCase {
+    export class UseCase implements DefaultUseCase<Input, Output> {
         constructor(
             private userRepository: UserRepository.Repository,
         ) {}
