@@ -1,9 +1,9 @@
 import { UserEntity } from "@/users/domain/entities/user.entity";
-import { BadRequestError } from "../errors/bad-request-error";
 import { UserRepository } from "@/users/domain/repositories/use.repository";
 import { HashProvider } from "@/shared/application/providers/hash-provider";
 import { UserOutput } from "../dtos/user-output";
 import { UseCase as DefaultUseCase } from "@/shared/application/useCases/use-cases";
+import { BadRequestError } from "@/shared/application/errors/bad-request-error";
 
 export namespace SingUpUseCase {
     export type Input = {

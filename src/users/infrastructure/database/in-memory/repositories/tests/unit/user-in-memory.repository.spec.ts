@@ -1,8 +1,8 @@
 import { userDataBuilder } from "@/users/domain/testing/helpers/user-data-builder";
 import { UserInMemoryRepository } from "../../user-in-memory.repository";
 import { UserEntity } from "@/users/domain/entities/user.entity";
-import { NotFoundError } from "@/shared/infrastructure/domain/errors/not-found-error";
-import { ConflictError } from "@/shared/infrastructure/domain/errors/conflict-error";
+import { ConflictError } from "@/shared/domain/errors/conflict-error";
+import { NotFoundError } from "@/shared/domain/errors/not-found-error";
 
 describe('InMemoryRepository unit tests', () => {
     let sut: UserInMemoryRepository;
