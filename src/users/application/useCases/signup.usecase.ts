@@ -1,7 +1,7 @@
 import { UserEntity } from "@/users/domain/entities/user.entity";
 import { UserRepository } from "@/users/domain/repositories/use.repository";
 import { HashProvider } from "@/shared/application/providers/hash-provider";
-import { UserOutput } from "../dtos/user-output";
+import { UserOutput, UserOutputMapper } from "../dtos/user-output";
 import { UseCase as DefaultUseCase } from "@/shared/application/useCases/use-cases";
 import { BadRequestError } from "@/shared/application/errors/bad-request-error";
 
@@ -34,7 +34,7 @@ export namespace SingUpUseCase {
                 Object.assign(input, { password: hashPassword })
             );
             await this.userRepository.insert(entity);
-            return entity.toJSON();
+            return UserOutputMapper.toOutput(entity);
         }
     }
 }
