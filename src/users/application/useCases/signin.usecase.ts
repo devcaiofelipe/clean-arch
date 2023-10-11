@@ -1,4 +1,3 @@
-import { UserEntity } from "@/users/domain/entities/user.entity";
 import { UserRepository } from "@/users/domain/repositories/use.repository";
 import { HashProvider } from "@/shared/application/providers/hash-provider";
 import { UserOutput, UserOutputMapper } from "../dtos/user-output";
@@ -6,7 +5,7 @@ import { UseCase as DefaultUseCase } from "@/shared/application/useCases/use-cas
 import { BadRequestError } from "@/shared/application/errors/bad-request-error";
 import { InvalidCredentialsError } from "@/shared/application/errors/invalid-credentials-error";
 
-export namespace SinInUseCase {
+export namespace SingInUseCase {
     export type Input = {
         email: string;
         password: string;
